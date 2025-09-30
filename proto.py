@@ -5,6 +5,7 @@ from enum import IntEnum
 # กำหนดค่าคงที่
 PACKET_SIZE = 1024  # ขนาด data สูงสุดต่อ packet
 HEADER_SIZE = 9 # ขนาด header ของ packet
+MAX_PACKET_SIZE = PACKET_SIZE + HEADER_SIZE  # ขนาด packet สูงสุด (data + header)
 TIMEOUT = 1.0       # รอ ACK 1 วินาที เป็นค่ามาตรฐาน
 MAX_RETRIES = 5     # ส่งซ้ำสูงสุด 5 ครั้ง
 
@@ -37,7 +38,7 @@ class Packet:
                     word = (temp_packet[i] << 8) + temp_packet[i + 1]
                 else:
                     # เหลือ 1 byte สุดท้าย
-                    word = temp_packet[i] << 8
+                    word = temp_packet[i] << 8 
                 
                 checksum += word
                 # ถ้ามี carry ให้บวกกลับ
