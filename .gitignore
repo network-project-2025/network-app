@@ -20,3 +20,7 @@ venv/
 
 # Test artifacts 
 recv_*
+
+# allow these folders
+!receive_test/
+!receive_test_gbn/
