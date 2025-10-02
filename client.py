@@ -5,7 +5,7 @@ import time
 import os
 from proto import (
     Packet, PacketType, PACKET_SIZE, TIMEOUT, MAX_PACKET_SIZE,
-    create_request_packet, create_ack_packet, calculate_file_hash
+    create_request_packet, create_ack_packet  
 )
 
 # ขนาด buffer สำหรับรับ packet (กำหนดตามโปรโตคอล)
@@ -173,15 +173,6 @@ class FileTransferClient:
 
         print(f"\n[CLIENT] Assembling file from {len(received_data)} packets...")
         file_data = b''.join(received_data[i] for i in sorted(received_data))
-
-        # ตรวจ hash (ถ้า server ส่งมา)
-        if file_hash_received:
-            calc = calculate_file_hash(file_data)
-            if calc == file_hash_received:
-                print(f"[CLIENT] File integrity verified (hash match)")
-            else:
-                print(f"[CLIENT] File integrity check failed!")
-                return False
 
         # เขียนไฟล์ลง disk
         try:

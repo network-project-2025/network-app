@@ -1,5 +1,4 @@
 import struct
-import hashlib
 from enum import IntEnum
 
 # กำหนดค่าคงที่
@@ -90,8 +89,7 @@ def create_eof_packet(seq_num, file_hash):  # สร้าง packet สำห�
 def create_error_packet(error_msg):  # สร้าง packet สำหรับแจ้ง error
     return Packet(PacketType.ERROR, 0, error_msg.encode('utf-8'))
 
-def calculate_file_hash(data): # คำนวณ MD5 hash ของไฟล์
-    return hashlib.md5(data).digest()
+
     
 
         
