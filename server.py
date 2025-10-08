@@ -24,12 +24,12 @@ def main():
 
     while True:
         try:
-            # รอ REQUEST จาก client (timeout 20 วินาที)
+            # รอ REQUEST จาก client (timeout 60 วินาที)
             sock.settimeout(REQUEST_TIMEOUT)
             try:
                 req_bytes, addr = sock.recvfrom(BUF_SIZE)
             except socket.timeout:
-                print("[server] No client request for 20 seconds, shutting down...")
+                print("[server] No client request for 60 seconds, shutting down...")
                 return
             pkt = Packet.from_bytes(req_bytes)
             if isinstance(pkt, tuple):  # รองรับกรณีคืน (pkt, ok)
