@@ -28,15 +28,16 @@ class GBNServer:
         try:
             self.sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
             self.sock.bind(('', self.port))
-            self.sock.settimeout(30.0)
-            logging.info(f'Listening on port {self.port} (GBN, window={WINDOW_SIZE})')
-            logging.info(f'ErrorSim: loss={self.sim.loss_rate:.0%}, corrupt={self.sim.corrupt_rate:.0%}')
+            print(f"[server] Listening on UDP port {self.port} (loss={self.sim.loss_rate:.0%}, corrupt={self.sim.corrupt_rate:.0%})")
 
             while True:
                 try:
+                    # รอ REQUEST จาก client (timeout 20 วินาที)
+                    self.sock.settimeout(20.0)
                     self.handle_once()
                 except socket.timeout:
-                    logging.info('No request. Waiting...')
+                    print("[server] No client request for 20 seconds, shutting down...")
+                    return
                 except KeyboardInterrupt:
                     break
         finally:

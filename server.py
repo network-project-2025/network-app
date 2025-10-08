@@ -6,6 +6,7 @@ from proto import Packet, PacketType, PACKET_SIZE, TIMEOUT, MAX_RETRIES, create_
 from errorsim import ErrorSim
 
 BUF_SIZE = PACKET_SIZE   # ขนาด buffer สำหรับรับ packet (header + data)
+REQUEST_TIMEOUT = 20.0   # ตั้ง timeout สำหรับรอ client ใหม่ 
 def main(): 
     parser = argparse.ArgumentParser(description="Reliable UDP Server (Stop-and-Wait)") 
     parser.add_argument("port", type=int, help="UDP port สำหรับรับ request")
@@ -23,8 +24,13 @@ def main():
 
     while True:
         try:
-            # รอ REQUEST จาก client
-            req_bytes, addr = sock.recvfrom(BUF_SIZE)
+            # รอ REQUEST จาก client (timeout 20 วินาที)
+            sock.settimeout(REQUEST_TIMEOUT)
+            try:
+                req_bytes, addr = sock.recvfrom(BUF_SIZE)
+            except socket.timeout:
+                print("[server] No client request for 20 seconds, shutting down...")
+                return
             pkt = Packet.from_bytes(req_bytes)
             if isinstance(pkt, tuple):  # รองรับกรณีคืน (pkt, ok)
                 pkt, ok = pkt
