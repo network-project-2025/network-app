@@ -32,11 +32,11 @@ class GBNServer:
 
             while True:
                 try:
-                    # รอ REQUEST จาก client (timeout 20 วินาที)
-                    self.sock.settimeout(20.0)
+                    # รอ REQUEST จาก client (timeout 60 วินาที)
+                    self.sock.settimeout(60.0)
                     self.handle_once()
                 except socket.timeout:
-                    print("[server] No client request for 20 seconds, shutting down...")
+                    print("[server] No client request for 60 seconds, shutting down...")
                     return
                 except KeyboardInterrupt:
                     break

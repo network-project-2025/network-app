@@ -77,8 +77,5 @@ python client_gbn.py 127.0.0.1 5000 tests/large.txt
 - `tests/large.txt` สำหรับทดสอบไฟล์ขนาดใหญ่
 - `tests/image.jpg` สำหรับทดสอบไฟล์ binary
 
-ตรวจสอบผลลัพธ์ด้วย `diff` หรือ `cmp`:
-```bash
-diff tests/small.txt recv_small.txt
-cmp tests/image.jpg recv_image.jpg
-```
+ตรวจสอบผลลัพธ์ที่ folder :
+```/receive_test```หรือ```/receive_test_gbn```

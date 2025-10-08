@@ -6,7 +6,7 @@ from proto import Packet, PacketType, PACKET_SIZE, TIMEOUT, MAX_RETRIES, create_
 from errorsim import ErrorSim
 
 BUF_SIZE = PACKET_SIZE   # ขนาด buffer สำหรับรับ packet (header + data)
-REQUEST_TIMEOUT = 20.0   # ตั้ง timeout สำหรับรอ client ใหม่ 
+REQUEST_TIMEOUT = 60.0   # ตั้ง timeout สำหรับรอ client ใหม่ 
 def main(): 
     parser = argparse.ArgumentParser(description="Reliable UDP Server (Stop-and-Wait)") 
     parser.add_argument("port", type=int, help="UDP port สำหรับรับ request")
