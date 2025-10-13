@@ -19,6 +19,7 @@ cd network-app
 
 # สร้าง virtual environment
 python3 -m venv .venv
+# ใช่เมื่อปิด venv ไปแล้วเท่านั้น
 source .venv/bin/activate   # macOS/Linux
 # หรือ
 .\.venv\Scripts\activate    # Windows
@@ -26,9 +27,30 @@ source .venv/bin/activate   # macOS/Linux
 
 > โปรเจกต์นี้ใช้แต่ Python built-in libraries ไม่ต้องติดตั้ง dependencies เพิ่ม
 
-## Usage
+## วิธีการ Run Project
 
-### วิธีที่ 1: ใช้ GUI 
+### วิธีที่ 1: ใช้ Command Line
+
+#### Server (Stop-and-Wait)
+```bash
+python server.py 5000 --loss 0.1 --corrupt 0.05
+```
+
+#### Client (Stop-and-Wait)
+```bash
+python client.py 127.0.0.1 5000 tests/medium.txt
+```
+
+#### Server (Go-Back-N)
+```bash
+python server_gbn.py 5000 --loss 0.05 --corrupt 0.02
+```
+
+#### Client (Go-Back-N)
+```bash
+python client_gbn.py 127.0.0.1 5000 tests/large.txt
+```
+### วิธีที่ 2: ใช้ GUI 
 
 #### เปิด Server GUI
 ```bash
@@ -48,28 +70,6 @@ python3 client_gui.py
 2. ใส่ Server IP และ Port
 3. กดปุ่ม "📁 เลือกไฟล์"
 4. กดปุ่ม "📤 ส่งไฟล์"
-
-### วิธีที่ 2: ใช้ Command Line
-
-#### Server (Stop-and-Wait)
-```bash
-python server.py 5000 --loss 0.1 --corrupt 0.05
-```
-
-#### Client (Stop-and-Wait)
-```bash
-python client.py 127.0.0.1 5000 tests/small.txt
-```
-
-#### Server (Go-Back-N)
-```bash
-python server_gbn.py 5000 --loss 0.05 --corrupt 0.02
-```
-
-#### Client (Go-Back-N)
-```bash
-python client_gbn.py 127.0.0.1 5000 tests/large.txt
-```
 
 ## Test Files
 - `tests/small.txt` สำหรับทดสอบข้อความสั้น
